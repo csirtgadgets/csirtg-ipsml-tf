@@ -1,0 +1,6 @@
+tensorflow==1.8
+pandas>=0.23
+keras>=2.2
+maxminddb>=1.2.0,<1.5
+geoip2>=2.9,<3.0
+arrow

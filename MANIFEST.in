@@ -1,0 +1,3 @@
+include versioneer.py
+include data
+include csirtg_ipsml_tf/_version.py
