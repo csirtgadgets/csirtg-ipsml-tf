@@ -1,4 +1,6 @@
 from csirtg_ipsml_tf.geo import asndb, citydb
+import ipaddress
+from csirtg_ipsml_tf.features import tz_data, cc_data
 
 
 def extract_features(indicator, ts):
@@ -52,3 +54,16 @@ def extract_features(indicator, ts):
 
 def normalize_ips(indicators):
     return indicators
+
+
+def fit_features(i):
+    for l in i:
+        try:
+            l[1] = int(ipaddress.ip_address(l[1]))
+        except:
+            l[1] = int(ipaddress.ip_address(l[1].decode('utf-8')))
+
+        l[4] = tz_data.transform([l[4]])[0]
+        l[5] = cc_data.transform([l[5]])[0]
+
+        yield l

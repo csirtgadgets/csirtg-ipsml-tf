@@ -46,7 +46,15 @@ setup(
     install_requires=[
         'tensorflow',
         'pandas',
-        'keras'
+        'keras',
+        'ipaddress',
+        'scipy',
+        'scikit-learn',
+        'numpy',
+        'geoip',
+        'arrow',
+        'maxminddb',
+        'geoip'
     ],
     entry_points={
        'console_scripts': [

@@ -39,6 +39,11 @@ SPLIT = float(SPLIT)
 
 DATA_PATH = 'data'
 
+# https://github.com/vprusso/tf_mushroom/blob/master/tf_mushroom.py
+# https://www.quora.com/How-can-TensorFlow-deep-learning-be-used-for-anomaly-detection
+# https://www.quora.com/How-do-I-use-LSTM-Networks-for-time-series-anomaly-detection/answer/Pankaj-Malhotra-2
+# https://jask.com/time-series-anomaly-detection-in-network-traffic-a-use-case-for-deep-neural-networks/
+# http://vprusso.github.io/blog/2017/tensor-flow-categorical-data/
 
 def train(csv_file):
     dataframe = pandas.read_csv(csv_file, engine='python', quotechar='"', header=None)
@@ -47,21 +52,6 @@ def train(csv_file):
     # Preprocess dataset
     X = dataset[:, 0]
     Y = dataset[:, 1]
-
-    for index, item in enumerate(X):
-        X[index] = item
-
-    tokenizer = Tokenizer(filters='\t\n', char_level=True)
-    tokenizer.fit_on_texts(X)
-
-    # Extract and save word dictionary
-    word_dict_file = WORD_DICT
-
-    if not os.path.exists(os.path.dirname(word_dict_file)):
-        os.makedirs(os.path.dirname(word_dict_file))
-
-    with open(word_dict_file, 'w') as outfile:
-        json.dump(tokenizer.word_index, outfile, ensure_ascii=False)
 
     num_words = len(tokenizer.word_index)+1
     X = tokenizer.texts_to_sequences(X)
@@ -123,9 +113,9 @@ def main():
             ip = l.rstrip()
 
             if args.good:
-                print('"%s",0' % ip)
+                print('%s,0' % ip)
             else:
-                print('"%s",1' % ip)
+                print('%s,1' % ip)
 
         raise SystemExit
 
