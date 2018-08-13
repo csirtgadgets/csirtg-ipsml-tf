@@ -15,6 +15,7 @@ from keras.models import load_model
 
 from csirtg_ipsml_tf.constants import MODEL, WEIGHTS, MAX_STRING_LEN, WORD_DICT
 from csirtg_ipsml_tf.utils import extract_features, normalize_ips
+from csirtg_ipsml_tf.features import tz_data, cc_data
 
 
 def predict(i):

@@ -3,8 +3,12 @@ __version__ = get_versions()['version']
 del get_versions
 VERSION = __version__
 
+import sys
 import os
 
+PYVERSION = 2
+if sys.version_info > (3,):
+    PYVERSION = 3
 
 BATCH_SIZE = os.getenv('BATCH_SIZE', 256)
 MODEL = os.getenv('MODEL', 'model.h5')

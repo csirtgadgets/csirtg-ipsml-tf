@@ -19,6 +19,7 @@ from keras.preprocessing import sequence
 from keras.preprocessing.text import Tokenizer
 
 from csirtg_ipsml_tf.constants import MAX_STRING_LEN, MODEL, WEIGHTS, BATCH_SIZE, WORD_DICT
+from csirtg_ipsml_tf.features import tz_data, cc_data
 
 BATCH_SIZE = int(BATCH_SIZE)
 MAX_STRING_LEN = int(MAX_STRING_LEN)
