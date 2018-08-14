@@ -53,7 +53,7 @@ def _stats(u, inverse=False):
 
 
 def test_basics():
-    assert _stats(IPS) >= 0.5
+    assert _stats(IPS) < 0.32
 
 
 def test_random():
@@ -62,7 +62,7 @@ def test_random():
         s.append([random.randint(0,23), str(fake.ipv4())])
 
     n = _stats(s)
-    assert n >= .50
+    assert n >= .55
 
 
 # def test_blacklist():
