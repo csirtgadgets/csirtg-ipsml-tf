@@ -15,7 +15,7 @@ if sys.argv[-1] == 'test':
         modules = map(__import__, test_requirements)
     except ImportError as e:
         err_msg = e.message.replace("No module named ", "")
-        msg = "%s is not installed. Install your test requirments." % err_msg
+        msg = "%s is not installed. Install your test requirements." % err_msg
         raise ImportError(msg)
     r = os.system('py.test test -v --cov=csirtg_ipsml_tf --cov-fail-under=35')
     if r == 0:
