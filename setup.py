@@ -26,7 +26,6 @@ if sys.argv[-1] == 'test':
 
 data_files = [
     'data/model.h5',
-    'data/word-dict.json',
     'data/weights.h5'
 ]
 
