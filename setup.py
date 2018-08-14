@@ -55,7 +55,6 @@ setup(
         'geoip2',
         'arrow',
         'maxminddb',
-        'geoip'
     ],
     entry_points={
        'console_scripts': [

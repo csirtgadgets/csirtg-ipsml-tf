@@ -21,8 +21,8 @@ from csirtg_ipsml_tf.utils import extract_features
 BATCH_SIZE = int(BATCH_SIZE)
 MAX_STRING_LEN = int(MAX_STRING_LEN)
 
-NEURONS = os.getenv('NEURONS', 16)
-EMBEDDED_DIM = os.getenv('EMBEDDED_DIM', 300)
+NEURONS = os.getenv('NEURONS', 32)
+EMBEDDED_DIM = os.getenv('EMBEDDED_DIM', 500)
 
 NEURONS = int(NEURONS)
 EMBEDDED_DIM = int(EMBEDDED_DIM)
@@ -31,7 +31,7 @@ EPOCHS = os.getenv('EPOCHS', 100)
 EPOCHS = int(EPOCHS)
 
 # training split
-SPLIT = os.getenv('TRAINING_SPLIT', .25)
+SPLIT = os.getenv('TRAINING_SPLIT', .3)
 SPLIT = float(SPLIT)
 
 DATA_PATH = 'data'
@@ -106,6 +106,10 @@ def main():
         for l in sys.stdin:
             l = l.rstrip()
             ts, ip = l.split(',')
+
+            import arrow
+            ts = arrow.get(ts)
+            ts = ts.strftime("%Y-%m-%dT%H:%M:%SZ")
 
             feats = extract_features(ip, ts)
             feats = [str(e) for e in list(feats)[0]]

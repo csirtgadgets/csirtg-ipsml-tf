@@ -33,7 +33,7 @@ def extract_features(indicator, ts):
 
     if city is None:
         #yield [ts, indicator, 0, 0, 'NA', 'NA', 0]
-        yield [ts, tz_data.transform(['NA'])[0], cc_data.transform(['NA'])[0]]
+        yield [ts, 90, 180, tz_data.transform(['NA'])[0], cc_data.transform(['NA'])[0]]
 
     else:
         if not asn:
@@ -59,12 +59,16 @@ def extract_features(indicator, ts):
         else:
             long = 0
 
+        # shift the negatives...
+        lat = lat + 90
+        long = long + 180
+
         tz = tz_data.transform([tz])[0]
         cc = cc_data.transform([cc])[0]
         # hour, src, dest, client, tz, cc, success
         #yield ts, indicator, lat, long, tz, cc, int(asn)
-        #yield ts, lat, long, tz, cc, int(asn)
-        yield [ts, tz, cc]
+        yield [ts, lat, long, tz, cc]
+        #yield [ts, tz, cc]
 
 
 def normalize_ips(indicators):
