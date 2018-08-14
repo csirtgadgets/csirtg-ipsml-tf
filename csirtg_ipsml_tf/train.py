@@ -8,33 +8,30 @@ warnings.simplefilter(action='ignore', category=FutureWarning)
 
 from argparse import ArgumentParser, RawDescriptionHelpFormatter
 import textwrap
-import json
 import pandas
 import sys
+from pprint import pprint
 
 from keras.models import Sequential
-from keras.layers import LSTM, Dense, Dropout
-from keras.layers.embeddings import Embedding
-from keras.preprocessing import sequence
-from keras.preprocessing.text import Tokenizer
+from keras.layers import LSTM, Dense, Dropout, Embedding
 
-from csirtg_ipsml_tf.constants import MAX_STRING_LEN, MODEL, WEIGHTS, BATCH_SIZE, WORD_DICT
-from csirtg_ipsml_tf.features import tz_data, cc_data
+from csirtg_ipsml_tf.constants import MAX_STRING_LEN, MODEL, WEIGHTS, BATCH_SIZE
+from csirtg_ipsml_tf.utils import extract_features
 
 BATCH_SIZE = int(BATCH_SIZE)
 MAX_STRING_LEN = int(MAX_STRING_LEN)
 
 NEURONS = os.getenv('NEURONS', 16)
-EMBEDDED_DIM = os.getenv('EMBEDDED_DIM', 32)
+EMBEDDED_DIM = os.getenv('EMBEDDED_DIM', 300)
 
 NEURONS = int(NEURONS)
 EMBEDDED_DIM = int(EMBEDDED_DIM)
 
-EPOCHS = os.getenv('EPOCHS', 3)
+EPOCHS = os.getenv('EPOCHS', 100)
 EPOCHS = int(EPOCHS)
 
 # training split
-SPLIT = os.getenv('TRAINING_SPLIT', .30)
+SPLIT = os.getenv('TRAINING_SPLIT', .25)
 SPLIT = float(SPLIT)
 
 DATA_PATH = 'data'
@@ -45,32 +42,29 @@ DATA_PATH = 'data'
 # https://jask.com/time-series-anomaly-detection-in-network-traffic-a-use-case-for-deep-neural-networks/
 # http://vprusso.github.io/blog/2017/tensor-flow-categorical-data/
 
+
 def train(csv_file):
     dataframe = pandas.read_csv(csv_file, engine='python', quotechar='"', header=None)
-    dataset = dataframe.sample(frac=1).values
+    dataset = dataframe.values
 
     # Preprocess dataset
-    X = dataset[:, 0]
-    Y = dataset[:, 1]
+    X = dataset[:, :7]
+    Y = dataset[:, -1]
 
-    num_words = len(tokenizer.word_index)+1
-    X = tokenizer.texts_to_sequences(X)
-
-    max_log_length = MAX_STRING_LEN
     train_size = int(len(dataset) * (1 - SPLIT))
 
-    X_processed = sequence.pad_sequences(X, maxlen=max_log_length)
-    X_train, X_test = X_processed[0:train_size], X_processed[train_size:len(X_processed)]
+    X_train, X_test = X[0:train_size], X[train_size:len(X)]
     Y_train, Y_test = Y[0:train_size], Y[train_size:len(Y)]
 
     model = Sequential()
-    model.add(Embedding(num_words, EMBEDDED_DIM, input_length=max_log_length))
+    model.add(Embedding(500, EMBEDDED_DIM))
     model.add(Dropout(0.5))
     model.add(LSTM(NEURONS, recurrent_dropout=0.5))
     model.add(Dropout(0.5))
     model.add(Dense(1, activation='sigmoid'))
     model.compile(loss='binary_crossentropy', optimizer='adam', metrics=['accuracy'])
     print(model.summary())
+
     model.fit(X_train, Y_train, validation_split=SPLIT, epochs=EPOCHS, batch_size=BATCH_SIZE)
 
     # Evaluate model
@@ -110,12 +104,16 @@ def main():
 
     if args.build:
         for l in sys.stdin:
-            ip = l.rstrip()
+            l = l.rstrip()
+            ts, ip = l.split(',')
+
+            feats = extract_features(ip, ts)
+            feats = [str(e) for e in list(feats)[0]]
 
             if args.good:
-                print('%s,0' % ip)
+                print('%s,0' % ','.join(feats))
             else:
-                print('%s,1' % ip)
+                print('%s,1' % ','.join(feats))
 
         raise SystemExit
 

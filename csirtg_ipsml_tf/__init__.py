@@ -9,6 +9,7 @@ warnings.simplefilter(action='ignore', category=FutureWarning)
 import sys, gc
 from argparse import ArgumentParser, RawDescriptionHelpFormatter
 import textwrap
+from pprint import pprint
 
 from keras import backend as K
 from keras.models import load_model
@@ -49,10 +50,16 @@ def main():
     else:
         indicators = args.indicators.split('|')
 
-    # indicators = [urlparse(i.lower()).geturl() for i in indicators]
-    indicators = normalize_ips(indicators)
+    from csirtg_ipsml_tf.utils import extract_features
 
-    predictions = predict(indicators)
+    indicators_new = []
+    for l in indicators:
+        ip, ts = l.split(',')
+        f = list(extract_features(ip, ts))
+        indicators_new.append(f[0])
+
+    pprint(indicators_new)
+    predictions = predict([indicators_new])
 
     for idx, v in enumerate(indicators):
         print("%f - %s" % (predictions[idx], v))
@@ -60,7 +67,3 @@ def main():
 
 if __name__ == '__main__':
     main()
-
-from ._version import get_versions
-__version__ = get_versions()['version']
-del get_versions
