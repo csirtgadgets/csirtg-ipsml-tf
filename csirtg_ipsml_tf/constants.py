@@ -21,15 +21,15 @@ MAX_STRING_LEN = os.getenv('MAX_STRING_LEN', 2083)
 
 import sys
 
-if os.path.exists(os.path.join(sys.prefix, 'csirtg_ipml_tf', 'data', MODEL)):
-    MODEL = os.path.join(sys.prefix, 'csirtg_ipml_tf', 'data', MODEL)
-    WEIGHTS = os.path.join(sys.prefix, 'csirtg_ipml_tf', 'data', WEIGHTS)
+if os.path.exists(os.path.join(sys.prefix, 'csirtg_ipsml_tf', 'data', MODEL)):
+    MODEL = os.path.join(sys.prefix, 'csirtg_ipsml_tf', 'data', MODEL)
+    WEIGHTS = os.path.join(sys.prefix, 'csirtg_ipsml_tf', 'data', WEIGHTS)
     WORD_DICT = os.path.join(sys.prefix, 'csirtg_ipml_tf', 'data', WORD_DICT)
 
-elif os.path.exists(os.path.join('/usr', 'local',  'csirtg_ipml_tf', 'data', MODEL)):
-    MODEL = os.path.join('/usr', 'local',  'csirtg_ipml_tf', 'data', MODEL)
-    WEIGHTS = os.path.join('/usr', 'local', 'csirtg_ipml_tf', 'data', WEIGHTS)
-    WORD_DICT = os.path.join('/usr', 'local', 'csirtg_ipml_tf', 'data', WORD_DICT)
+elif os.path.exists(os.path.join('/usr', 'local',  'csirtg_ipsml_tf', 'data', MODEL)):
+    MODEL = os.path.join('/usr', 'local',  'csirtg_ipsml_tf', 'data', MODEL)
+    WEIGHTS = os.path.join('/usr', 'local', 'csirtg_ipsml_tf', 'data', WEIGHTS)
+    WORD_DICT = os.path.join('/usr', 'local', 'csirtg_ipsml_tf', 'data', WORD_DICT)
 
 else:
     MODEL = os.path.join('%s/../data/%s' % (os.path.dirname(__file__), MODEL))

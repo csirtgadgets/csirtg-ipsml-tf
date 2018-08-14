@@ -26,7 +26,9 @@ if sys.argv[-1] == 'test':
 
 data_files = [
     'data/model.h5',
-    'data/weights.h5'
+    'data/weights.h5',
+    'data/cc.txt',
+    'data/timezones.txt'
 ]
 
 setup(
@@ -43,14 +45,14 @@ setup(
     author_email="wes@csirtgadgets.com",
     packages=find_packages(),
     install_requires=[
-        'tensorflow',
+        'tensorflow==1.8',
         'pandas',
         'keras',
         'ipaddress',
         'scipy',
         'scikit-learn',
         'numpy',
-        'geoip',
+        'geoip2',
         'arrow',
         'maxminddb',
         'geoip'

@@ -5,11 +5,11 @@ from sklearn import preprocessing
 me = os.path.dirname(__file__)
 CC_FILE = "%s/../data/cc.txt" % me
 
-if os.path.exists(os.path.join(sys.prefix, 'csirtg_ipsml', 'data', 'cc.txt')):
-    CC_FILE = os.path.join(sys.prefix, 'csirtg_ipsml', 'data', 'cc.txt')
+if os.path.exists(os.path.join(sys.prefix, 'csirtg_ipsml_tf', 'data', 'cc.txt')):
+    CC_FILE = os.path.join(sys.prefix, 'csirtg_ipsml_tf', 'data', 'cc.txt')
 
-elif os.path.exists(os.path.join('/usr', 'local', 'csirtg_ipsml', 'data', 'cc.txt')):
-    CC_FILE = os.path.join('/usr', 'local', 'csirtg_ipsml', 'data', 'cc.txt')
+elif os.path.exists(os.path.join('/usr', 'local', 'csirtg_ipsml_tf', 'data', 'cc.txt')):
+    CC_FILE = os.path.join('/usr', 'local', 'csirtg_ipsml_tf', 'data', 'cc.txt')
 
 elif os.path.exists(("%s/data/cc.txt" % me)):
     CC_FILE = "%s/data/cc.txt" % me
@@ -18,11 +18,11 @@ CC = []
 
 TZ_FILE = "%s/../data/timezones.txt" % me
 
-if os.path.exists(os.path.join(sys.prefix, 'csirtg_ipsml', 'data', 'timezones.txt')):
-    TZ_FILE = os.path.join(sys.prefix, 'csirtg_ipsml', 'data', 'timezones.txt')
+if os.path.exists(os.path.join(sys.prefix, 'csirtg_ipsml_tf', 'data', 'timezones.txt')):
+    TZ_FILE = os.path.join(sys.prefix, 'csirtg_ipsml_tf', 'data', 'timezones.txt')
 
-elif os.path.exists(os.path.join('/usr', 'local', 'csirtg_ipsml', 'data', 'timezones.txt')):
-    TZ_FILE = os.path.join('/usr', 'local', 'csirtg_ipsml', 'data', 'timezones.txt')
+elif os.path.exists(os.path.join('/usr', 'local', 'csirtg_ipsml_tf', 'data', 'timezones.txt')):
+    TZ_FILE = os.path.join('/usr', 'local', 'csirtg_ipsml_tf', 'data', 'timezones.txt')
 
 elif os.path.exists(("%s/data/timezones.txt" % me)):
     TZ_FILE = "%s/data/timezones.txt" % me
