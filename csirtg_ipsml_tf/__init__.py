@@ -10,6 +10,7 @@ import sys, gc
 from argparse import ArgumentParser, RawDescriptionHelpFormatter
 import textwrap
 from pprint import pprint
+import arrow
 
 from keras import backend as K
 from keras.models import load_model
@@ -34,7 +35,7 @@ def main():
     p = ArgumentParser(
         description=textwrap.dedent('''\
                 example usage:
-                    $ csirtg-ipsml-tf -i 18.210.110.64,34.235.98.66
+                    $ csirtg-ipsml-tf -i 18.210.110.64,17|34.235.98.66,04
                 '''),
         formatter_class=RawDescriptionHelpFormatter,
     )
@@ -50,19 +51,21 @@ def main():
     else:
         indicators = args.indicators.split('|')
 
-    from csirtg_ipsml_tf.utils import extract_features
-
     indicators_new = []
     for l in indicators:
-        ip, ts = l.split(',')
+        if ',' not in l:
+            ip = l
+            ts = arrow.utcnow().hour
+        else:
+            ip, ts = l.split(',')
+
         f = list(extract_features(ip, ts))
         indicators_new.append(f[0])
 
-    pprint(indicators_new)
     predictions = predict([indicators_new])
 
     for idx, v in enumerate(indicators):
-        print("%f - %s" % (predictions[idx], v))
+        print('%.2f - %s' % (predictions[idx], v))
 
 
 if __name__ == '__main__':

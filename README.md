@@ -25,10 +25,11 @@ $ pip install -r dev_requirements.txt
 $ python setup.py develop
 $ bash helpers/build.sh
 
-$ csirtg-ipsml -i 122.2.223.242,6  # indicator, hour-detected
-Yes
-$ csirtg-domainsml -i 141.142.164.33  # indicator, hour-detected
-No
+$ csirtg-ipsml-tf -i 122.2.223.242,6  # indicator, hour-detected
+0.50 - 122.2.223.242,6 # 50% probabiltiy
+
+$ csirtg-ipsml-tf -i 141.142.164.33  # indicator, hour-detected
+0.31 - 141.142.164.33 # 31% probability
 ```
 
 # COPYRIGHT AND LICENSE
