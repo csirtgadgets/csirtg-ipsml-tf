@@ -8,6 +8,11 @@ def extract_features(indicator, ts):
     ts = arrow.get(ts)
     ts = ts.hour
 
+    import re
+    match = re.search('^(\S+)\/\d+$', indicator)
+    if match:
+        indicator = match.group(1)
+
     # week?
     try:
         asn = asndb.asn(indicator)
@@ -26,10 +31,10 @@ def extract_features(indicator, ts):
         city = None
 
     # v6???
-    try:
-        indicator = int(ipaddress.ip_address(indicator))
-    except:
-        indicator = int(ipaddress.ip_address(indicator.decode('utf-8')))
+    #try:
+    #    indicator = int(ipaddress.ip_address(indicator))
+    #except:
+    #    indicator = int(ipaddress.ip_address(indicator.decode('utf-8')))
 
     if city is None:
         #yield [ts, indicator, 0, 0, 'NA', 'NA', 0]
