@@ -29,7 +29,7 @@ def _stats(u, inverse=False):
 
     f = []
     for p in u:
-        feats = list(extract_features(p[1], p[0]))
+        feats = list(extract_features(p[1], int(p[0])))
         f.append(feats[0])
 
     p = predict([f])
@@ -53,7 +53,9 @@ def _stats(u, inverse=False):
 
 
 def test_basics():
-    assert _stats(IPS) < 0.32
+    n = _stats(IPS)
+    pprint(n)
+    assert n < 0.32
 
 
 def test_random():
