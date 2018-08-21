@@ -31,11 +31,12 @@ def _stats(u, inverse=False):
     f = []
     for p in u:
         feats = list(extract_features(p[0], p[1]))
+        pprint(feats)
         f.append(feats[0])
 
     p = predict([f])
 
-    pprint(p)
+    #pprint(p)
 
     for idx, v in enumerate(f):
         if p[idx] >= 0.68:
@@ -53,6 +54,11 @@ def _stats(u, inverse=False):
     return n
 
 
+def test_feats():
+    feats = list(extract_features('141.142.234.238', 0))
+    assert feats == [[0, 127, 83, 402, 233]], 'did you install the maxmind geo data?'
+
+
 def test_basics():
     n = _stats(IPS)
     assert n < 0.32
@@ -64,7 +70,7 @@ def test_random():
         s.append([str(fake.ipv4()), random.randint(0, 23)])
 
     n = _stats(s)
-    assert n >= .51
+    assert n >= .51 and n != 1.0
 
 
 # def test_blacklist():
@@ -81,8 +87,8 @@ def test_random():
 #
 #     n = _stats(d)
 #     assert n > THRESHOLD
-#
-#
+
+
 # def test_whitelist():
 #     d = []
 #     with open('data/whitelist.txt') as FILE:
