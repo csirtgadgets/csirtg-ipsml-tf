@@ -7,14 +7,15 @@ cache:
 
 python:
   - 2.7
-  - 3.6
+#  - 3.6
 
 install:
   - pip install -r dev_requirements.txt
 
 script:
   - python setup.py test
-  - python setup.py sdist bdist bdist_wheel
+  - py.test -sv
+  #- python setup.py sdist bdist bdist_wheel
 
 notifications:
   email:

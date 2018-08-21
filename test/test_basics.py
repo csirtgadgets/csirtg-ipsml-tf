@@ -13,9 +13,9 @@ fake = Faker()
 
 
 IPS = [
-    #('141.142.234.238', 0),
-    ('128.205.1.1', 1),
-    ('128.205.1.1', 17)
+    ['141.142.234.238', 0],
+    ['128.205.1.1', 1],
+    ['128.205.1.1', 17]
 ]
 
 THRESHOLD = 0.92
@@ -27,6 +27,7 @@ def _stats(u, inverse=False):
     positives = 0
     t1 = time()
 
+    pprint(u)
     f = []
     for p in u:
         feats = list(extract_features(p[0], p[1]))
@@ -54,7 +55,6 @@ def _stats(u, inverse=False):
 
 def test_basics():
     n = _stats(IPS)
-    pprint(n)
     assert n < 0.32
 
 
