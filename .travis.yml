@@ -7,7 +7,7 @@ cache:
 
 python:
   - 2.7
-#  - 3.6
+  - 3.6
 
 before_install:
   - sudo add-apt-repository -y ppa:maxmind/ppa
@@ -23,8 +23,7 @@ install:
 
 script:
   - python setup.py test
-  - py.test -sv
-  #- python setup.py sdist bdist bdist_wheel
+  - python setup.py sdist bdist bdist_wheel
 
 notifications:
   email:
