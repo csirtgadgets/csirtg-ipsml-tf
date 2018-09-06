@@ -54,7 +54,10 @@ def main():
     networks = set()
     for l in sys.stdin.readlines():
         l = l.rstrip()
-        _, fqdn = l.split(',')
+        if ',' in l:
+            _, fqdn = l.split(',')
+        else:
+            fqdn = l
         ips = resolve_ns(fqdn)
         if not ips:
             continue
