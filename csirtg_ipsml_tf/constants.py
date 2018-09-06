@@ -19,7 +19,7 @@ BUILD_MODE = os.getenv('BUILD_MODE', '0')
 # this is specific to the model
 MAX_STRING_LEN = os.getenv('MAX_STRING_LEN', 2083)
 
-if BUILD_MODE:
+if BUILD_MODE == '1':
     MODEL = os.path.join('data', MODEL)
     WEIGHTS = os.path.join('data', WEIGHTS)
     WORD_DICT = os.path.join('data', WORD_DICT)
