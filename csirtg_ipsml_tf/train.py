@@ -121,6 +121,7 @@ def main():
 
         raise SystemExit
 
+    print("Model location: %s" % MODEL)
     train(args.training)
 
 
