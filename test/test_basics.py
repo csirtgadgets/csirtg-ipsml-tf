@@ -74,6 +74,15 @@ def test_random():
     assert n >= .51 and n != 1.0
 
 
+def test_network():
+    i = str('42.0.32.0/19')
+
+    feats = list(extract_features(i, 22))
+
+    p = predict([feats])
+
+    assert p[0][0] >= 0.84
+
 # def test_blacklist():
 #     d = []
 #     with open('data/blacklist.txt') as FILE:
