@@ -71,7 +71,7 @@ def test_random():
         s.append([str(fake.ipv4()), random.randint(0, 23)])
 
     n = _stats(s)
-    assert n >= .51 and n != 1.0
+    assert .16 < n < .84
 
 
 def test_network():
