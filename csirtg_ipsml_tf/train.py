@@ -21,13 +21,13 @@ from csirtg_ipsml_tf.utils import extract_features
 BATCH_SIZE = int(BATCH_SIZE)
 MAX_STRING_LEN = int(MAX_STRING_LEN)
 
-NEURONS = os.getenv('NEURONS', 32)
-EMBEDDED_DIM = os.getenv('EMBEDDED_DIM', 500)
+NEURONS = os.getenv('NEURONS', 16)
+EMBEDDED_DIM = os.getenv('EMBEDDED_DIM', 30)
 
 NEURONS = int(NEURONS)
 EMBEDDED_DIM = int(EMBEDDED_DIM)
 
-EPOCHS = os.getenv('EPOCHS', 100)
+EPOCHS = os.getenv('EPOCHS', 10)
 EPOCHS = int(EPOCHS)
 
 # training split

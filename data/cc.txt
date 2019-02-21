@@ -1,3 +1,4 @@
+KOSOVO;XK
 None;NA
 NA;NA
 EU;EU
