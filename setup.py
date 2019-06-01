@@ -45,7 +45,7 @@ setup(
     author_email="wes@csirtgadgets.com",
     packages=find_packages(),
     install_requires=[
-        'tensorflow==1.8',
+        'tensorflow',
         'pandas',
         'keras',
         'ipaddress',
