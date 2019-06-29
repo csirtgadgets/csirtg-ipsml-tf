@@ -1,6 +1,7 @@
 None
 NA
 Asia/Istanbul
+Asia/Qostanay
 Australia/NSW
 Australia/West
 Australia/Victoria
